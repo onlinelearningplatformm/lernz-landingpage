@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lernz Academy - Tutor Mahasiswa Terbaik Pilihanmu</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Animate On Scroll (AOS) Library for Animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Swiper.js for Slideshow -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+    <style>
+        /* Menggunakan font Poppins sebagai font utama */
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        /* Kustomisasi warna utama (Biru) */
+        .bg-lernz-blue { background-color: #2563EB; }
+        .text-lernz-blue { color: #2563EB; }
+        .border-lernz-blue { border-color: #2563EB; }
+        .hover\:bg-lernz-blue-dark:hover { background-color: #1D4ED8; }
+        
+        /* Style untuk tombol filter */
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid #DBEAFE;
+            background-color: #EFF6FF;
+            color: #2563EB;
+        }
+        .filter-btn:hover {
+            background-color: #DBEAFE;
+        }
+        .filter-btn.active {
+            background-color: #2563EB;
+            color: white;
+            border-color: #2563EB;
+        }
+        /* Style untuk Modal */
+        .modal {
+            transition: opacity 0.3s ease;
+        }
+        /* Style untuk Swiper Slideshow */
+        .swiper-button-next, .swiper-button-prev {
+            color: #ffffff;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+        }
+        .swiper-button-next:after, .swiper-button-prev:after {
+            font-size: 20px;
+        }
+        .swiper-pagination-bullet-active {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- ===== HEADER/NAVBAR ===== -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <a href="#">
+                <img src="https://i.imgur.com/1L1uA5T.png" alt="Lernz Academy Logo" class="h-16 w-auto">
+            </a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#fitur" class="text-gray-600 hover:text-lernz-blue">Fitur</a>
+                <a href="#tutor" class="text-gray-600 hover:text-lernz-blue">Tutor</a>
+                <a href="#tentang-kami" class="text-gray-600 hover:text-lernz-blue">Tentang Kami</a>
+                <a href="#testimoni" class="text-gray-600 hover:text-lernz-blue">Testimoni</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button id="login-btn" class="hidden md:block text-gray-600 hover:text-lernz-blue">Masuk</button>
+                <button id="signup-btn" class="bg-lernz-blue text-white px-4 py-2 rounded-lg font-semibold hover:bg-lernz-blue-dark transition-colors">
+                    Daftar Gratis
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- ===== HERO SECTION ===== -->
+        <section class="bg-white">
+            <div class="container mx-auto px-6 py-20 md:py-24 text-center">
+                <h1 data-aos="fade-up" class="text-4xl md:text-6xl font-extrabold text-gray-900 leading-tight">
+                    Temukan Tutor <span class="text-lernz-blue">Mahasiswa Terbaik</span> Pilihanmu.
+                </h1>
+                <p data-aos="fade-up" data-aos-delay="200" class="mt-4 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+                    Belajar lebih mudah dan terjangkau untuk semua jenjang, dari SD hingga Kuliah, dengan bimbingan mahasiswa berprestasi dari kampus ternama.
+                </p>
+                <div data-aos="fade-up" data-aos-delay="400" class="mt-8 max-w-xl mx-auto">
+                    <div class="flex flex-col md:flex-row items-center gap-4 bg-white p-2 rounded-lg shadow-lg">
+                        <input type="text" id="search-input" placeholder="Cari nama tutor atau mata pelajaran..." class="w-full px-4 py-3 text-gray-700 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-lernz-blue">
+                        <a href="#tutor" id="search-button" class="w-full md:w-auto bg-lernz-blue text-white font-bold px-8 py-3 rounded-lg hover:bg-lernz-blue-dark transition-colors flex-shrink-0">
+                            Cari
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- ===== TUTOR SECTION ===== -->
+        <section id="tutor" class="py-16 sm:py-24 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center" data-aos="fade-up">
+                    <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl">Temukan Tutor Terbaikmu</h2>
+                    <p class="mt-4 text-lg text-gray-600">Gunakan filter untuk menemukan tutor yang paling sesuai dengan kebutuhanmu.</p>
+                </div>
+
+                <!-- Tombol Filter -->
+                <div id="filter-buttons" class="mt-12 flex flex-wrap justify-center gap-2 md:gap-4" data-aos="fade-up">
+                    <button class="filter-btn active" data-level="Semua">Semua</button>
+                    <button class="filter-btn" data-level="SD">SD</button>
+                    <button class="filter-btn" data-level="SMP">SMP</button>
+                    <button class="filter-btn" data-level="SMA">SMA</button>
+                    <button class="filter-btn" data-level="Kuliah">Kuliah</button>
+                </div>
+
+                <!-- Grid untuk menampilkan Tutor -->
+                <div id="tutor-grid" class="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                    <!-- Kartu tutor akan di-generate oleh JavaScript di sini -->
+                </div>
+                <div id="no-results" class="hidden text-center mt-16 text-gray-500">
+                    <p class="text-xl font-semibold">Tutor tidak ditemukan</p>
+                    <p>Coba gunakan kata kunci atau filter yang berbeda.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== FEATURES SECTION ===== -->
+        <section id="fitur" class="py-16 sm:py-24 bg-white">
+            <div class="container mx-auto px-6">
+                 <div class="text-center" data-aos="fade-up">
+                    <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl">Kenapa Memilih Lernz Academy?</h2>
+                    <p class="mt-4 text-lg text-gray-600">Tiga alasan utama untuk belajar bersama kami.</p>
+                </div>
+                <div class="mt-16 grid gap-8 md:grid-cols-3 text-center">
+                    <div class="p-8 bg-gray-50 rounded-xl shadow-md" data-aos="fade-up" data-aos-delay="100">
+                        <div class="bg-blue-100 text-lernz-blue rounded-full p-4 inline-flex">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v.01M12 6v-1m0-1V4m0 2.01M12 18v-2m0 2v1m0 1v1m0-2.01M4.93 6.93l.707.707M18.36 18.36l.707.707M4.93 17.07l.707-.707M18.36 5.64l.707-.707"/></svg>
+                        </div>
+                        <h3 class="mt-4 text-xl font-bold">Harga Terjangkau</h3>
+                        <p class="mt-2 text-gray-600">Belajar berkualitas tidak harus mahal. Dapatkan bimbingan dari mahasiswa berprestasi dengan harga yang ramah di kantong.</p>
+                    </div>
+                    <div class="p-8 bg-gray-50 rounded-xl shadow-md" data-aos="fade-up" data-aos-delay="200">
+                        <div class="bg-blue-100 text-lernz-blue rounded-full p-4 inline-flex">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        </div>
+                        <h3 class="mt-4 text-xl font-bold">Tutor Kompeten & Terseleksi</h3>
+                        <p class="mt-2 text-gray-600">Semua tutor kami adalah mahasiswa dari universitas ternama yang telah kami verifikasi identitas dan kompetensinya.</p>
+                    </div>
+                    <div class="p-8 bg-gray-50 rounded-xl shadow-md" data-aos="fade-up" data-aos-delay="300">
+                         <div class="bg-blue-100 text-lernz-blue rounded-full p-4 inline-flex">
+                           <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                        </div>
+                        <h3 class="mt-4 text-xl font-bold">Jadwal Super Fleksibel</h3>
+                        <p class="mt-2 text-gray-600">Atur sendiri jadwal belajarmu. Lakukan sesi belajar kapan pun dan di mana pun sesuai kesepakatan dengan tutor pilihanmu.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- ===== TENTANG KAMI SECTION ===== -->
+        <section id="tentang-kami" class="py-16 sm:py-24 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center" data-aos="fade-up">
+                    <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl">Tentang Lernz Academy</h2>
+                    <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">Kami percaya pendidikan berkualitas harus bisa diakses oleh semua orang, tanpa terkecuali.</p>
+                </div>
+                <div class="mt-16 max-w-4xl mx-auto bg-white p-8 md:p-12 rounded-xl shadow-lg" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="text-2xl font-bold text-lernz-blue">Platform Kami</h3>
+                    <p class="mt-4 text-gray-700">Lernz Academy adalah platform ed-tech inovatif yang menjembatani kesenjangan antara kebutuhan belajar siswa dengan potensi besar yang dimiliki oleh para mahasiswa berprestasi di Indonesia. Kami menyediakan sebuah marketplace di mana siswa dari tingkat SD hingga mahasiswa dapat dengan mudah menemukan dan menjadwalkan sesi bimbingan belajar privat dengan tutor mahasiswa yang kompeten, terverifikasi, dan memiliki semangat mengajar yang tinggi—semuanya dengan harga yang jauh lebih terjangkau.</p>
+                    
+                    <div class="mt-10">
+                        <h3 class="text-2xl font-bold text-lernz-blue">Visi Kami</h3>
+                        <p class="mt-4 text-gray-700">Menjadi platform ed-tech terdepan di Indonesia yang mendemokratisasi akses terhadap pendidikan berkualitas, memberdayakan generasi muda untuk meraih potensi terbaik mereka.</p>
+                    </div>
+
+                    <div class="mt-10">
+                        <h3 class="text-2xl font-bold text-lernz-blue">Misi Kami</h3>
+                        <ul class="mt-4 space-y-3 text-gray-700 list-disc list-inside">
+                            <li>Menyediakan bimbingan belajar yang fleksibel dan terjangkau untuk semua kalangan.</li>
+                            <li>Memberdayakan mahasiswa berprestasi sebagai tutor, memberikan mereka pengalaman mengajar dan sumber penghasilan tambahan yang berarti.</li>
+                            <li>Membangun platform teknologi yang intuitif, aman, dan mudah digunakan bagi siswa maupun tutor.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== GALLERY SLIDESHOW SECTION (BARU) ===== -->
+        <section id="gallery" class="py-16 sm:py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center" data-aos="fade-up">
+                    <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl">Momen Belajar di Lernz Academy</h2>
+                    <p class="mt-4 text-lg text-gray-600">Lihat keseruan dan fokus para siswa dan tutor kami.</p>
+                </div>
+                <div class="mt-12" data-aos="fade-up">
+                    <!-- Swiper -->
+                    <div class="swiper-container h-96 w-full rounded-2xl shadow-xl">
+                        <div class="swiper-wrapper">
+                            <!-- Slide 1 (Video) -->
+                            <div class="swiper-slide relative">
+                                <video class="w-full h-full object-cover" src="https://i.imgur.com/UCHjHZv.mp4" autoplay loop muted playsinline></video>
+                                <div class="absolute inset-0 bg-gradient-to-t from-lernz-blue/60 to-transparent"></div>
+                            </div>
+                            <!-- Slide 2 (Image) -->
+                            <div class="swiper-slide relative">
+                                <img class="w-full h-full object-cover" src="https://i.imgur.com/L5DqwET.jpeg" alt="Suasana Belajar 1">
+                                <div class="absolute inset-0 bg-gradient-to-t from-lernz-blue/60 to-transparent"></div>
+                            </div>
+                            <!-- Slide 3 (Video) -->
+                            <div class="swiper-slide relative">
+                                <video class="w-full h-full object-cover" src="https://i.imgur.com/rYPVcEV.mp4" autoplay loop muted playsinline></video>
+                                <div class="absolute inset-0 bg-gradient-to-t from-lernz-blue/60 to-transparent"></div>
+                            </div>
+                            <!-- Slide 4 (Video) -->
+                            <div class="swiper-slide relative">
+                                <video class="w-full h-full object-cover" src="https://i.imgur.com/U00vnos.mp4" autoplay loop muted playsinline></video>
+                                <div class="absolute inset-0 bg-gradient-to-t from-lernz-blue/60 to-transparent"></div>
+                            </div>
+                        </div>
+                        <!-- Add Pagination -->
+                        <div class="swiper-pagination"></div>
+                        <!-- Add Navigation -->
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== TESTIMONIALS SECTION ===== -->
+        <section id="testimoni" class="py-16 sm:py-24 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center" data-aos="fade-up">
+                    <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl">Apa Kata Mereka?</h2>
+                    <p class="mt-4 text-lg text-gray-600">Pengalaman nyata dari para siswa kami.</p>
+                </div>
+                <div class="mt-16 grid gap-8 lg:grid-cols-2">
+                    <div class="bg-white p-8 rounded-xl shadow-md" data-aos="fade-right">
+                        <p class="text-gray-700">"Kak Bima sabar banget ngajarnya. Konsep fisika kinematika yang tadinya bikin pusing jadi gampang dimengerti lewat simulasi sederhana. Nilai TO aku langsung naik signifikan, makasih banyak Lernz!"</p>
+                        <div class="mt-4 flex items-center">
+                            <div class="flex-shrink-0">
+                                <div class="w-12 h-12 rounded-full bg-lernz-blue text-white flex items-center justify-center font-bold text-xl">F</div>
+                            </div>
+                            <div class="ml-4">
+                                <p class="font-bold text-gray-900">Fauzan A.</p>
+                                <p class="text-sm text-gray-500">Siswa Kelas 12 SMA</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-8 rounded-xl shadow-md" data-aos="fade-left">
+                         <p class="text-gray-700">"Awalnya pesimis bisa ngejar materi Biologi & Kimia buat persiapan masuk Kedokteran. Kak Michelle ngasih strategi belajar dan cara bedah soal-soal HOTS yang jitu banget. Sekarang jadi jauh lebih siap dan optimis!"</p>
+                        <div class="mt-4 flex items-center">
+                            <div class="flex-shrink-0">
+                               <div class="w-12 h-12 rounded-full bg-lernz-blue text-white flex items-center justify-center font-bold text-xl">S</div>
+                            </div>
+                            <div class="ml-4">
+                                <p class="font-bold text-gray-900">Salsa Nabila</p>
+                                <p class="text-sm text-gray-500">Siswa Kelas 12 SMA IPA</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- ===== FINAL CTA ===== -->
+        <section class="bg-lernz-blue">
+            <div class="container mx-auto px-6 py-16 text-center text-white" data-aos="zoom-in">
+                 <h2 class="text-3xl font-bold sm:text-4xl">Siap untuk Mulai Belajar?</h2>
+                 <p class="mt-4 text-lg text-blue-200">Temukan tutor yang tepat untukmu dan raih target akademismu sekarang juga.</p>
+                 <a href="#tutor" class="mt-8 inline-block bg-white text-lernz-blue font-bold px-8 py-3 rounded-lg hover:bg-gray-200 transition-colors">
+                    Cari Tutor Sekarang
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="bg-gray-800 text-white">
+        <div class="container mx-auto px-6 py-12">
+            <div class="grid gap-8 md:grid-cols-12">
+                <div class="md:col-span-4">
+                    <img src="https://i.imgur.com/1L1uA5T.png" class="h-16 w-auto" alt="Lernz Academy Logo">
+                    <p class="mt-4 text-gray-400">Platform bimbingan belajar online yang menghubungkan siswa dengan tutor mahasiswa terbaik.</p>
+                </div>
+                <div class="md:col-span-2">
+                    <h4 class="font-semibold tracking-wider">Navigasi</h4>
+                    <ul class="mt-4 space-y-2">
+                        <li><a href="#fitur" class="text-gray-400 hover:text-white">Fitur</a></li>
+                        <li><a href="#tutor" class="text-gray-400 hover:text-white">Tutor</a></li>
+                        <li><a href="#tentang-kami" class="text-gray-400 hover:text-white">Tentang Kami</a></li>
+                        <li><a href="#testimoni" class="text-gray-400 hover:text-white">Testimoni</a></li>
+                    </ul>
+                </div>
+                <div class="md:col-span-3">
+                    <h4 class="font-semibold tracking-wider">Karir</h4>
+                    <p class="mt-4 text-gray-400">Punya semangat mengajar? Bergabunglah dengan tim kami!</p>
+                    <button id="join-tutor-btn" class="mt-4 text-sm bg-lernz-blue text-white px-4 py-2 rounded-lg font-semibold hover:bg-lernz-blue-dark transition-colors">
+                        Daftar Jadi Tutor
+                    </button>
+                </div>
+                 <div class="md:col-span-3">
+                    <h4 class="font-semibold tracking-wider">Hubungi Kami</h4>
+                    <ul class="mt-4 space-y-3">
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-gray-400" viewBox="0 0 20 20" fill="currentColor"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" /><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" /></svg>
+                            <a href="mailto:support@lernzacademy.com" class="text-gray-400 hover:text-white">support@lernzacademy.com</a>
+                        </li>
+                    </ul>
+                    <div class="mt-4 flex space-x-4">
+                        <a href="http://wa.me/+6281333549403" target="_blank" class="text-gray-400 hover:text-white">
+                            <span class="sr-only">WhatsApp</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.886-.001 2.269.655 4.505 1.905 6.331l-1.282 4.685 4.849-1.282z"/></svg>
+                        </a>
+                        <a href="https://www.instagram.com/superprof.id/" target="_blank" class="text-gray-400 hover:text-white">
+                            <span class="sr-only">Instagram</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-gray-700 pt-8 text-center text-gray-400 text-sm">
+                <p>&copy; 2025 Lernz Academy. Dibuat untuk Proyek Mata Kuliah.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== MODAL PROFIL TUTOR ===== -->
+    <div id="tutor-modal" class="modal hidden fixed inset-0 bg-black bg-opacity-75 z-50 items-center justify-center p-4">
+        <div id="tutor-modal-content" class="bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] flex flex-col md:flex-row overflow-hidden">
+            <!-- Konten modal tutor akan di-generate oleh JavaScript -->
+        </div>
+    </div>
+
+    <!-- ===== MODAL LOGIN/SIGNUP ===== -->
+    <div id="auth-modal" class="modal hidden fixed inset-0 bg-black bg-opacity-75 z-50 items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md relative">
+            <button id="close-auth-modal-btn" class="absolute top-4 right-4 text-gray-400 hover:text-gray-700">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <div id="auth-modal-content" class="p-8 md:p-12">
+                 <!-- Konten modal auth akan di-generate oleh JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== MODAL DAFTAR TUTOR ===== -->
+    <div id="join-tutor-modal" class="modal hidden fixed inset-0 bg-black bg-opacity-75 z-50 items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg relative max-h-[90vh] overflow-y-auto">
+            <button id="close-join-tutor-modal-btn" class="absolute top-4 right-4 text-gray-400 hover:text-gray-700">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <div class="p-8 md:p-12">
+                 <h2 class="text-2xl md:text-3xl font-bold text-center text-gray-900">Gabung Menjadi Tutor</h2>
+                 <p class="text-center text-gray-500 mt-2">Bagikan ilmumu dan dapatkan penghasilan tambahan.</p>
+                 <form class="mt-8 space-y-6">
+                    <div>
+                        <label for="tutor-name" class="sr-only">Nama Lengkap</label>
+                        <input id="tutor-name" name="tutor-name" type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-lg placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-lernz-blue" placeholder="Nama Lengkap">
+                    </div>
+                    <div>
+                        <label for="tutor-email" class="sr-only">Email</label>
+                        <input id="tutor-email" name="tutor-email" type="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-lernz-blue" placeholder="Alamat Email">
+                    </div>
+                    <div>
+                        <label for="tutor-phone" class="sr-only">Nomor Telepon</label>
+                        <input id="tutor-phone" name="tutor-phone" type="tel" required class="w-full px-4 py-3 border border-gray-300 rounded-lg placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-lernz-blue" placeholder="Nomor Telepon Aktif">
+                    </div>
+                     <div>
+                        <label for="tutor-university" class="sr-only">Asal Universitas</label>
+                        <input id="tutor-university" name="tutor-university" type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-lg placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-lernz-blue" placeholder="Asal Universitas">
+                    </div>
+                    <div>
+                        <label for="tutor-major" class="sr-only">Jurusan</label>
+                        <input id="tutor-major" name="tutor-major" type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-lg placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-lernz-blue" placeholder="Jurusan">
+                    </div>
+                     <div>
+                        <label for="tutor-experience" class="sr-only">Pengalaman Mengajar (Opsional)</label>
+                        <textarea id="tutor-experience" name="tutor-experience" rows="3" class="w-full px-4 py-3 border border-gray-300 rounded-lg placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-lernz-blue" placeholder="Ceritakan pengalaman mengajarmu (opsional)"></textarea>
+                    </div>
+                    <div>
+                        <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent text-base font-medium rounded-lg text-white bg-lernz-blue hover:bg-lernz-blue-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lernz-blue">
+                            Kirim Pendaftaran
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- AOS Script -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Swiper.js Script -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+        });
+
+        // --- SCRIPT UNTUK FITUR PENCARIAN, FILTER, DAN MODAL ---
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Database Tutor dalam format JavaScript Object
+            const tutors = [
+                { id: 1, nama: "Rina Hastuti", universitas: "Universitas Negeri Malang", jurusan: "PGSD", pelajaran: "Bahasa Indonesia", harga: 60000, bio: "Menjadikan belajar Bahasa Indonesia menyenangkan dengan permainan kata dan cerita interaktif!", level: "SD", foto: "https://i.imgur.com/uijXFhp.png" },
+                { id: 2, nama: "David Kurniawan", universitas: "Universitas Brawijaya", jurusan: "Sastra Inggris", pelajaran: "Bahasa Inggris Dasar", harga: 65000, bio: "Membangun kepercayaan diri berbicara bahasa Inggris sejak dini melalui lagu dan percakapan seru.", level: "SD", foto: "https://i.imgur.com/Dgr4mS6.png" },
+                { id: 3, nama: "Anisa Wulandari", universitas: "Universitas Negeri Surabaya", jurusan: "Pendidikan IPA", pelajaran: "IPA Dasar Sains", harga: 60000, bio: "Mengubah rasa ingin tahu anak menjadi pemahaman sains lewat eksperimen sederhana dan menarik.", level: "SD", foto: "https://i.imgur.com/db0ZcUZ.png" },
+                { id: 4, nama: "Budi Santoso", universitas: "Universitas Muhammadiyah Malang", jurusan: "Pendidikan Matematika", pelajaran: "Matematika Dasar", harga: 65000, bio: "Setiap anak bisa jago matematika! Saya bantu pecahkan soal sulit dengan cara yang mudah dan logis.", level: "SD", foto: "https://i.imgur.com/5Mwa9Bk.png" },
+                { id: 5, nama: "Amanda Sari", universitas: "Universitas Airlangga", jurusan: "Sastra Inggris", pelajaran: "Bahasa Inggris", harga: 70000, bio: "Fokus pada praktik percakapan dan pemahaman grammar agar lebih percaya diri menggunakan Bahasa Inggris.", level: "SMP", foto: "https://i.imgur.com/LNJu9A9.png" },
+                { id: 6, nama: "Farhan Ramadhan", universitas: "Institut Teknologi Sepuluh Nopember (ITS)", jurusan: "Teknik Fisika", pelajaran: "IPA Terpadu Fisika", harga: 75000, bio: "Membuktikan bahwa Fisika itu tidak rumit dengan menghubungkan setiap konsep ke fenomena sehari-hari.", level: "SMP", foto: "https://i.imgur.com/Cr2Y43o.png" },
+                { id: 7, nama: "Lestari Putri", universitas: "Universitas Negeri Malang", jurusan: "Pendidikan Biologi", pelajaran: "IPA Terpadu Biologi", harga: 75000, bio: "Menjelajahi keajaiban makhluk hidup dan lingkungan sekitar dengan metode visual yang mudah diingat.", level: "SMP", foto: "https://i.imgur.com/Dj5Edem.png" },
+                { id: 8, nama: "Rian Pratama", universitas: "Universitas Negeri Malang", jurusan: "Pendidikan Geografi", pelajaran: "IPS Terpadu Geografi", harga: 70000, bio: "Membuka wawasan tentang dunia dan isinya, membuat belajar Geografi relevan dan tidak membosankan.", level: "SMP", foto: "https://i.imgur.com/IJO66LR.png" },
+                { id: 9, nama: "Gilang Wijaya", universitas: "Universitas Gadjah Mada (UGM)", jurusan: "Ilmu Sejarah", pelajaran: "IPS Terpadu Sejarah", harga: 70000, bio: "Belajar sejarah adalah belajar dari cerita. Saya bantu merangkai peristiwa agar mudah dipahami, bukan dihafal.", level: "SMP", foto: "https://i.imgur.com/j4VJ7Fd.png" },
+                { id: 10, nama: "Cynthia Bella", universitas: "Institut Teknologi Bandung (ITB)", jurusan: "Matematika", pelajaran: "Matematika", harga: 80000, bio: "Saya percaya semua orang bisa menaklukkan matematika. Fokus pada pemahaman konsep dasar dan latihan soal bertahap.", level: "SMP", foto: "https://i.imgur.com/yKSEQE2.png" },
+                { id: 11, nama: "Sarah Larasati", universitas: "Universitas Indonesia (UI)", jurusan: "Biologi", pelajaran: "Biologi", harga: 80000, bio: "Menguasai materi Biologi dengan strategi jitu dan metode hafalan efektif untuk sukses di ujian.", level: "SMA", foto: "https://i.imgur.com/rerRNrH.png" },
+                { id: 12, nama: "Kevin Mahendra", universitas: "Universitas Brawijaya", jurusan: "Teknik Informatika", pelajaran: "C++ untuk Pemula", harga: 85000, bio: "Belajar coding dari nol dengan pendekatan praktik langsung. Kamu bisa buat program pertamamu dalam beberapa sesi!", level: "SMA", foto: "https://i.imgur.com/eBzhWPh.png" },
+                { id: 13, nama: "Adinda Putri", universitas: "Universitas Indonesia (UI)", jurusan: "Teknik Komputer", pelajaran: "Dasar Pemrograman Python", harga: 85000, bio: "Python itu bahasa yang kuat tapi mudah dipelajari. Mari kita mulai petualangan coding yang seru!", level: "SMA", foto: "https://i.imgur.com/WllJ4H3.png" },
+                { id: 14, nama: "Clarissa Wibowo", universitas: "Universitas Gadjah Mada (UGM)", jurusan: "Ilmu Ekonomi", pelajaran: "Ekonomi", harga: 80000, bio: "Membuat konsep ekonomi yang kompleks menjadi sederhana dan relevan dengan contoh kasus nyata.", level: "SMA", foto: "https://i.imgur.com/fNr2wC4.jpeg" },
+                { id: 15, nama: "Bima Aditya", universitas: "Institut Teknologi Bandung (ITB)", jurusan: "Teknik Fisika", pelajaran: "Fisika", harga: 85000, bio: "Fokus pada pemahaman konsep mendalam dan logika berpikir untuk menaklukkan soal-soal HOTS Fisika.", level: "SMA", foto: "https://i.imgur.com/UT8D2eB.jpeg" },
+                { id: 16, nama: "Andini Febrianti", universitas: "Universitas Padjadjaran", jurusan: "Geografi", pelajaran: "Geografi Lanjutan", harga: 75000, bio: "Menganalisis fenomena geosfer secara mendalam. Siap bantu kamu untuk persiapan OSN dan UTBK!", level: "SMA", foto: "https://i.imgur.com/00qOw0s.png" },
+                { id: 17, nama: "Michelle Wijaya", universitas: "Universitas Airlangga", jurusan: "Teknik Kimia", pelajaran: "Kimia", harga: 80000, bio: "Mari kita bedah rahasia di balik reaksi kimia dengan metode belajar yang terstruktur dan mudah diingat.", level: "SMA", foto: "https://i.imgur.com/MJmYrMT.jpeg" },
+                { id: 18, nama: "Diana Puspita", universitas: "Universitas Indonesia (UI)", jurusan: "Sosiologi", pelajaran: "Sosiologi", harga: 75000, bio: "Memahami masyarakat jadi lebih seru! Saya bantu kamu mengaitkan teori sosiologi dengan isu-isu sosial terkini.", level: "SMA", foto: "https://i.imgur.com/uFUzEzO.png" },
+                { id: 19, nama: "Jonathan Lee", universitas: "Universitas Kristen Petra", jurusan: "Sastra Inggris", pelajaran: "Bahasa Inggris TOEFL", harga: 90000, bio: "Strategi jitu untuk setiap sesi tes TOEFL. Fokus pada latihan soal, time management, dan tips untuk meraih skor targetmu.", level: "SMA", foto: "https://i.imgur.com/iecPGwX.png" },
+                { id: 20, nama: "Rizky Setiawan", universitas: "Institut Teknologi Bandung (ITB)", jurusan: "Teknik Informatika", pelajaran: "Algoritma Struktur Data", harga: 90000, bio: "Fokus pada pemahaman logika dan efisiensi kode untuk menyelesaikan problem-solving yang kompleks.", level: "Kuliah", foto: "https://i.imgur.com/y5R7ih6.png" },
+                { id: 21, nama: "Daffa Ardiyansah", universitas: "Institut Teknologi Sepuluh Nopember (ITS)", jurusan: "Matematika", pelajaran: "Aljabar Linear", harga: 90000, bio: "Mengubah matriks dan vektor yang abstrak menjadi konsep yang logis dan mudah divisualisasikan.", level: "Kuliah", foto: "https://i.imgur.com/reWpena.png" },
+                { id: 22, nama: "Felicia Angelina", universitas: "Universitas Telkom", jurusan: "Sistem Informasi", pelajaran: "Basis Data SQL", harga: 85000, bio: "Dari merancang ERD hingga menulis query yang kompleks, saya bantu kamu kuasai SQL untuk manajemen data.", level: "Kuliah", foto: "https://i.imgur.com/9m6BmYm.png" },
+                { id: 23, nama: "Surya Putra", universitas: "Institut Teknologi Sepuluh Nopember (ITS)", jurusan: "Teknik Elektro", pelajaran: "Kalkulus I", harga: 90000, bio: "Limit, turunan, dan integral tidak akan jadi momok lagi. Saya bantu bangun fondasi Kalkulus yang kuat.", level: "Kuliah", foto: "https://i.imgur.com/lAElR3i.png" },
+                { id: 24, nama: "Samuel Chandra", universitas: "Universitas Bina Nusantara (BINUS)", jurusan: "Teknik Informatika", pelajaran: "C++ untuk Pemula", harga: 80000, bio: "Memahami fundamental C++ mulai dari pointer hingga konsep dasar OOP dengan pendekatan berbasis proyek.", level: "Kuliah", foto: "https://i.imgur.com/G0QHocg.png" },
+                { id: 25, nama: "Fikri Hidayat", universitas: "Universitas Indonesia (UI)", jurusan: "Ilmu Komputer", pelajaran: "Dasar Pemrograman Python", harga: 85000, bio: "Mengajarkan Pythonic way untuk menulis kode yang bersih, efisien, dan mudah dibaca.", level: "Kuliah", foto: "https://i.imgur.com/gPNNu9J.png" },
+                { id: 26, nama: "Eric Prasetyo", universitas: "Universitas Gadjah Mada (UGM)", jurusan: "Teknik Komputer", pelajaran: "Jaringan Komputer", harga: 90000, bio: "Mendalami konsep dari OSI layer hingga subnetting dengan contoh praktis dan simulasi jaringan.", level: "Kuliah", foto: "https://i.imgur.com/jmFVeUl.png" },
+                { id: 27, nama: "Handoko Salim", universitas: "Universitas Gadjah Mada (UGM)", jurusan: "Ilmu Komputer", pelajaran: "Matematika Diskrit", harga: 90000, bio: "Logika, teori himpunan, dan graf bukan lagi hal yang abstrak. Kunci utama untuk berpikir seperti seorang programmer.", level: "Kuliah", foto: "https://i.imgur.com/ny8xPL2.png" },
+                { id: 28, nama: "Grace Monica", universitas: "Universitas Bina Nusantara (BINUS)", jurusan: "Game Application and Technology", pelajaran: "PBO Java", harga: 90000, bio: "Menguasai pilar-pilar Object-Oriented Programming (OOP) dengan Java lewat studi kasus yang relevan.", level: "Kuliah", foto: "https://i.imgur.com/HMqTJ8J.png" },
+                { id: 29, nama: "Natasha Aurelia", universitas: "Institut Pertanian Bogor (IPB)", jurusan: "Statistika", pelajaran: "Statistika Probabilitas", harga: 90000, bio: "Membuatmu berteman dengan data, dari distribusi probabilitas hingga teorema Bayes. Sangat berguna untuk data science!", level: "Kuliah", foto: "https://i.imgur.com/5HMIZiJ.png" },
+                { id: 30, nama: "Valery Tan", universitas: "Universitas Ciputra", jurusan: "Desain Komunikasi Visual (DKV)", pelajaran: "UI UX Design Fundamental", harga: 90000, bio: "Belajar merancang produk digital yang tidak hanya indah, tapi juga fungsional dan berpusat pada pengguna (user-centered).", level: "Kuliah", foto: "https://i.imgur.com/kYn6dUs.png" }
+            ];
+
+            const tutorGrid = document.getElementById('tutor-grid');
+            const searchInput = document.getElementById('search-input');
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const noResultsDiv = document.getElementById('no-results');
+            
+            // Variabel untuk Modal Tutor
+            const tutorModal = document.getElementById('tutor-modal');
+            const tutorModalContent = document.getElementById('tutor-modal-content');
+            
+            // Variabel untuk Modal Auth
+            const authModal = document.getElementById('auth-modal');
+            const authModalContent = document.getElementById('auth-modal-content');
+            const loginBtn = document.getElementById('login-btn');
+            const signupBtn = document.getElementById('signup-btn');
+            const closeAuthModalBtn = document.getElementById('close-auth-modal-btn');
+
+            // Variabel untuk Modal Daftar Tutor
+            const joinTutorModal = document.getElementById('join-tutor-modal');
+            const joinTutorBtn = document.getElementById('join-tutor-btn');
+            const closeJoinTutorModalBtn = document.getElementById('close-join-tutor-modal-btn');
+
+
+            function renderTutors(tutorList) {
+                tutorGrid.innerHTML = '';
+                if (tutorList.length === 0) {
+                    noResultsDiv.classList.remove('hidden');
+                } else {
+                    noResultsDiv.classList.add('hidden');
+                }
+
+                tutorList.forEach(tutor => {
+                    const tutorCard = `
+                        <div class="bg-white rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 flex flex-col">
+                            <img class="h-80 w-full object-cover object-top" src="${tutor.foto}" alt="Foto ${tutor.nama}">
+                            <div class="p-6 flex flex-col flex-grow">
+                                <h3 class="text-xl font-bold text-gray-900">${tutor.nama}</h3>
+                                <p class="text-sm font-medium text-lernz-blue mt-1">${tutor.universitas} - ${tutor.jurusan}</p>
+                                <p class="text-sm text-gray-500 mt-2">Spesialisasi: ${tutor.pelajaran}</p>
+                                <p class="text-gray-600 mt-4 text-sm italic flex-grow">"${tutor.bio}"</p>
+                                <div class="mt-6 flex justify-between items-center">
+                                    <p class="text-lg font-bold text-lernz-blue">Rp ${tutor.harga.toLocaleString('id-ID')}<span class="font-normal text-sm text-gray-500">/jam</span></p>
+                                    <button data-id="${tutor.id}" class="open-tutor-modal-btn bg-blue-100 text-lernz-blue px-4 py-2 rounded-lg font-semibold text-sm hover:bg-blue-200 transition-colors">Lihat Profil</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    tutorGrid.innerHTML += tutorCard;
+                });
+                
+                addTutorModalButtonListeners();
+            }
+
+            // --- Logika untuk Modal Tutor ---
+            function openTutorModal(tutorId) {
+                const tutor = tutors.find(t => t.id === tutorId);
+                if (!tutor) return;
+
+                tutorModalContent.innerHTML = `
+                    <div class="w-full md:w-1/3 flex-shrink-0">
+                        <img src="${tutor.foto}" alt="Foto ${tutor.nama}" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-8 flex flex-col flex-grow overflow-y-auto">
+                        <div class="flex-grow">
+                            <span class="inline-block bg-blue-100 text-lernz-blue px-3 py-1 rounded-full text-sm font-semibold">${tutor.level}</span>
+                            <h2 class="text-3xl font-bold text-gray-900 mt-4">${tutor.nama}</h2>
+                            <p class="text-md text-gray-600 mt-1">${tutor.universitas} - ${tutor.jurusan}</p>
+                            
+                            <h3 class="text-xl font-bold text-gray-800 mt-8 mb-2">Tentang Tutor</h3>
+                            <p class="text-gray-700">${tutor.bio}</p>
+
+                            <h3 class="text-xl font-bold text-gray-800 mt-8 mb-2">Spesialisasi</h3>
+                            <p class="text-gray-700">${tutor.pelajaran}</p>
+                        </div>
+
+                        <div class="mt-8 pt-6 border-t border-gray-200">
+                            <div class="flex justify-between items-center">
+                                <p class="text-2xl font-bold text-lernz-blue">Rp ${tutor.harga.toLocaleString('id-ID')}<span class="font-normal text-base text-gray-500">/jam</span></p>
+                                <button class="bg-lernz-blue text-white font-bold px-8 py-3 rounded-lg hover:bg-lernz-blue-dark transition-all duration-300 transform hover:scale-105">
+                                    Pesan Kelas Sekarang
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="close-tutor-modal-btn" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                `;
+
+                tutorModal.classList.remove('hidden');
+                tutorModal.classList.add('flex');
+                document.body.style.overflow = 'hidden';
+
+                document.getElementById('close-tutor-modal-btn').addEventListener('click', closeTutorModal);
+            }
+
+            function closeTutorModal() {
+                tutorModal.classList.add('hidden');
+                tutorModal.classList.remove('flex');
+                if (authModal.classList.contains('hidden') && joinTutorModal.classList.contains('hidden')) {
+                    document.body.style.overflow = 'auto';
+                }
+            }
+
+            function addTutorModalButtonListeners() {
+                document.querySelectorAll('.open-tutor-modal-btn').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const tutorId = parseInt(this.dataset.id);
+                        openTutorModal(tutorId);
+                    });
+                });
+            }
+            
+            // --- Logika untuk Modal Login/Signup ---
+            function openAuthModal(isLogin) {
+                const title = isLogin ? 'Masuk ke Akun Anda' : 'Buat Akun Baru';
+                const buttonText = isLogin ? 'Masuk' : 'Daftar';
+                const switchText = isLogin ? 'Belum punya akun? <a href="#" id="switch-to-signup" class="font-semibold text-lernz-blue hover:underline">Daftar</a>' : 'Sudah punya akun? <a href="#" id="switch-to-login" class="font-semibold text-lernz-blue hover:underline">Masuk</a>';
+
+                authModalContent.innerHTML = `
+                    <h2 class="text-2xl md:text-3xl font-bold text-center text-gray-900">${title}</h2>
+                    <form class="mt-8 space-y-6">
+                        <div id="username-field" class="${isLogin ? 'hidden' : ''}">
+                            <label for="username" class="sr-only">Username</label>
+                            <input id="username" name="username" type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-lg placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-lernz-blue" placeholder="Username">
+                        </div>
+                        <div>
+                            <label for="email" class="sr-only">Email</label>
+                            <input id="email" name="email" type="email" autocomplete="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-lernz-blue" placeholder="Alamat email">
+                        </div>
+                        <div>
+                            <label for="password" class="sr-only">Password</label>
+                            <input id="password" name="password" type="password" autocomplete="current-password" required class="w-full px-4 py-3 border border-gray-300 rounded-lg placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-lernz-blue" placeholder="Password">
+                        </div>
+                        <div>
+                            <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent text-base font-medium rounded-lg text-white bg-lernz-blue hover:bg-lernz-blue-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lernz-blue">
+                                ${buttonText}
+                            </button>
+                        </div>
+                    </form>
+                    <p class="mt-6 text-center text-sm text-gray-600">
+                        ${switchText}
+                    </p>
+                `;
+                
+                authModal.classList.remove('hidden');
+                authModal.classList.add('flex');
+                document.body.style.overflow = 'hidden';
+
+                if (isLogin) {
+                    document.getElementById('switch-to-signup').addEventListener('click', (e) => {
+                        e.preventDefault();
+                        openAuthModal(false);
+                    });
+                } else {
+                    document.getElementById('switch-to-login').addEventListener('click', (e) => {
+                        e.preventDefault();
+                        openAuthModal(true);
+                    });
+                }
+            }
+
+            function closeAuthModal() {
+                authModal.classList.add('hidden');
+                authModal.classList.remove('flex');
+                 if (tutorModal.classList.contains('hidden') && joinTutorModal.classList.contains('hidden')) {
+                    document.body.style.overflow = 'auto';
+                }
+            }
+
+            loginBtn.addEventListener('click', () => openAuthModal(true));
+            signupBtn.addEventListener('click', () => openAuthModal(false));
+            closeAuthModalBtn.addEventListener('click', closeAuthModal);
+
+            // --- Logika untuk Modal Daftar Tutor ---
+            function openJoinTutorModal() {
+                joinTutorModal.classList.remove('hidden');
+                joinTutorModal.classList.add('flex');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeJoinTutorModal() {
+                joinTutorModal.classList.add('hidden');
+                joinTutorModal.classList.remove('flex');
+                if (tutorModal.classList.contains('hidden') && authModal.classList.contains('hidden')) {
+                    document.body.style.overflow = 'auto';
+                }
+            }
+
+            joinTutorBtn.addEventListener('click', openJoinTutorModal);
+            closeJoinTutorModalBtn.addEventListener('click', closeJoinTutorModal);
+
+
+            // --- Logika Filter dan Render Utama ---
+            function filterAndRender() {
+                const searchTerm = searchInput.value.toLowerCase();
+                const activeFilter = document.querySelector('.filter-btn.active').dataset.level;
+
+                const filteredTutors = tutors.filter(tutor => {
+                    const matchesLevel = activeFilter === 'Semua' || tutor.level === activeFilter;
+                    const matchesSearch = tutor.nama.toLowerCase().includes(searchTerm) || tutor.pelajaran.toLowerCase().includes(searchTerm);
+                    return matchesLevel && matchesSearch;
+                });
+
+                renderTutors(filteredTutors);
+            }
+
+            searchInput.addEventListener('keyup', filterAndRender);
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    filterAndRender();
+                });
+            });
+            
+            // --- Logika Penutupan Modal Umum ---
+            tutorModal.addEventListener('click', function(e) {
+                if (e.target === tutorModal) {
+                    closeTutorModal();
+                }
+            });
+            authModal.addEventListener('click', function(e) {
+                if (e.target === authModal) {
+                    closeAuthModal();
+                }
+            });
+            joinTutorModal.addEventListener('click', function(e) {
+                if (e.target === joinTutorModal) {
+                    closeJoinTutorModal();
+                }
+            });
+
+            window.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    if (!tutorModal.classList.contains('hidden')) closeTutorModal();
+                    if (!authModal.classList.contains('hidden')) closeAuthModal();
+                    if (!joinTutorModal.classList.contains('hidden')) closeJoinTutorModal();
+                }
+            });
+
+            // Inisialisasi Swiper
+            var swiper = new Swiper('.swiper-container', {
+                loop: true,
+                autoplay: {
+                    delay: 4000,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+            });
+
+            // Render awal
+            filterAndRender();
+        });
+    </script>
+</body>
+</html>
